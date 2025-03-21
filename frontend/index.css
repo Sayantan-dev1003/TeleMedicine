@@ -2,7 +2,7 @@
 
 body {
   scrollbar-width: thin;
-  scrollbar-color: #3498db #ffffff;
+  scrollbar-color: #81dede #ffffff;
 }
 
 ::-webkit-scrollbar {
@@ -11,7 +11,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #3498db;
+  background-color: #81dede;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -26,10 +26,6 @@ body {
 
 .poppins {
   font-family: "Poppins", sans-serif;
-}
-
-.moonDance {
-    font-family: "Moon Dance", cursive;
 }
 
 .montserrat {
