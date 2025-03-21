@@ -8,6 +8,8 @@ import path from 'path';
 import multer from 'multer';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import patientModel from './models/patientModel.js'
+import doctorModel from './models/doctorModel.js'
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -130,13 +132,13 @@ app.post("/login", async (req, res) => {
 });
 
 // User Logout
-app.post("/logout", (req, res) => {
+app.get("/logout", (req, res) => {
     res.cookie("token", "", { httpOnly: true, expires: new Date(0) });
     res.redirect("/");
 });
 
 // Catch-all route to serve the frontend
-app.get("*", authenticateToken, (req, res) => {
+app.get("*",  (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
