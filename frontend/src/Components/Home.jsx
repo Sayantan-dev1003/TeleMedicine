@@ -1,6 +1,7 @@
 import React from 'react';
 import LandingImage from "../../public/Landingimg.jpg";
 import Navbar from './Navbar';
+import { Link as ScrollLink } from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -33,9 +34,9 @@ const LandingPage = () => {
                         Connect with top doctors online for consultations, prescriptions, and expert medical advice from the comfort of your home.
                     </p>
 
-                    <button className='bg-[#027c7c] text-white mt-5 w-52 px-6 py-3 tracking-wider text-center text-xl rounded-full cursor-pointer poppins hover:bg-[#81dede] hover:text-[#064747] hover:scale-110 transform duration-300 ease-in-out font-bold'>
+                    <ScrollLink to="about" smooth={true} className='bg-[#027c7c] text-white mt-5 w-52 px-6 py-3 tracking-wider text-center text-xl rounded-full cursor-pointer poppins hover:bg-[#81dede] hover:text-[#064747] hover:scale-110 transform duration-300 ease-in-out font-bold'>
                         Get Started <FontAwesomeIcon icon={faArrowRight} />
-                    </button>
+                    </ScrollLink>
                 </div>
             </div>
         </>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Signup from './Signup';
-import { Link  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 
@@ -37,17 +37,17 @@ function HeroSection() {
       <h1 className='flex justify-center font-bold text-4xl poppins text-[#064848]'>About</h1>
       <div className="flex justify-center items-center w-full gap-10 p-10">
         {cardData.map((card, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="group bg-white rounded-2xl  shadow-xl overflow-hidden transition-transform transform hover:scale-105 duration-300 w-100 h-[500px] [perspective:1000px]"
           >
             <div className="relative w-full h-full [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] transition-all duration-500">
               {/* Front Side */}
               <div className="absolute w-full h-full [backface-visibility:hidden]">
-                <img 
-                  src={card.image} 
-                  alt={card.title} 
-                  className="w-full h-48 object-cover rounded-t-2xl" 
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="w-full h-48 object-cover rounded-t-2xl"
                 />
                 <div className="p-5 text-center">
                   <h2 className="text-2xl font-bold text-gray-800 p-3">{card.title}</h2>
@@ -59,7 +59,7 @@ function HeroSection() {
                 </div>
               </div>
 
-         
+
               <div className="absolute w-full  h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#064848] rounded-2xl flex flex-col items-center justify-center p-5">
                 <h2 className="text-2xl font-bold text-white mb-4">{card.title}</h2>
                 <p className="text-white text-center mb-6">Discover more about our {card.title.toLowerCase()} feature</p>
@@ -72,7 +72,7 @@ function HeroSection() {
         ))}
       </div>
       {isSignupOpen && <Signup setIsSignupOpen={setIsSignupOpen} setIsSigninOpen={setIsSigninOpen} />}
-            {isSigninOpen && <Signin setIsSignupOpen={setIsSignupOpen} setIsSigninOpen={setIsSigninOpen} />}
+      {isSigninOpen && <Signin setIsSignupOpen={setIsSignupOpen} setIsSigninOpen={setIsSigninOpen} />}
     </div>
   )
 }
