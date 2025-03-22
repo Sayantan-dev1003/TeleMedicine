@@ -130,6 +130,20 @@ app.post("/login", async (req, res) => {
     }
 });
 
+// Fetch patient details (for PatientHeader component)
+app.get("/api/patient", authenticateToken, async (req, res) => {
+    try {
+        const patient = await patientModel.findById(req.user.userid);
+        if (!patient) {
+            return res.status(404).json({ error: "Patient not found" });
+        }
+        res.json({ name: patient.fullname });
+    } catch (error) {
+        console.error("Error fetching patient data:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 // User Logout
 app.get("/logout", (req, res) => {
     res.cookie("token", "", { httpOnly: true, expires: new Date(0) });

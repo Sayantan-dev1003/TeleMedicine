@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios';
+import axios from "axios";
 
 const PatientHeader = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [patientName, setPatientName] = useState('');
+    const [patientName, setPatientName] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('/api/patient')
-            .then(response => {
+        const fetchPatientData = async () => {
+            try {
+                const response = await axios.get("/api/patient", { withCredentials: true });
                 setPatientName(response.data.name);
-            })
-            .catch(error => console.error("Error fetching patient data:", error));
+            } catch (error) {
+                console.error("Error fetching patient data:", error);
+            }
+        };
+
+        fetchPatientData();
     }, []);
 
     const handleLogout = async () => {
         try {
-            await axios.post('/api/logout');
-            navigate('/login');
+            await axios.post("/api/logout", {}, { withCredentials: true });
+            navigate("/login");
         } catch (error) {
             console.error("Logout failed:", error);
         }
