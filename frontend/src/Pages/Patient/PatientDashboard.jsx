@@ -38,7 +38,7 @@ const PatientDashboard = () => {
             {[
               { title: "Video Consultation", desc: "Instant expert advice via video call", img: DeliveryImg, route: "/video-consultation" },
               { title: "Medicine Recommendation", desc: "Reliable solutions for common health concerns", img: DeliveryImg, route: "/medicine-recommendation" },
-              { title: "Support", desc: "Reliable assistance for all your healthcare needs", img: DeliveryImg, route: "/patient-support" },
+              { title: "Nearby Hospitals", desc: "Find trusted healthcare facilities within a 20-25 km radius for quick and reliable medical assistance.", img: DeliveryImg, route: "/patient-support" },
             ].map((specialty, index) => (
               <div key={index} onClick={() => navigate(specialty.route)} className="relative z-0 p-8 rounded-xl shadow-lg backdrop-blur-xl bg-gradient-to-b from-[#69afaf] to-[#0e5952] text-white flex flex-col justify-center items-center text-center cursor-pointer">
                 <div className="absolute inset-0 bg-black/40 rounded-xl"></div>

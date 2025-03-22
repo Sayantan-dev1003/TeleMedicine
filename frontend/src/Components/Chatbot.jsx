@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRobot, faXmark } from '@fortawesome/free-solid-svg-icons';
 import Signup from "./Signup";
 import Signin from "./Signin";
-import Cookies from 'js-cookie'; // Import js-cookie
+import Cookies from 'js-cookie';
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,10 +17,6 @@ const Chatbot = () => {
         setIsOpen((prev) => !prev);
         setShowWelcome(false);
     };
-
-    // const formatText = (text) => {
-    //     return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-    // };
 
     useEffect(() => {
         let timer;
