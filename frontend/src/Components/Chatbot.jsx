@@ -69,6 +69,7 @@ const Chatbot = () => {
             }
     
             const data = await response.json();
+
     
             setChatHistory([...chatHistory, { user: userInput }, { bot: data.response }]);
     

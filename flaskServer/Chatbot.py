@@ -177,6 +177,11 @@
 # # Run the Flask app
 # if __name__ == "__main__":
 #     app.run(debug=True)
+
+
+
+
+
 from flask import Flask, request, jsonify
 import requests
 import json
@@ -184,6 +189,8 @@ from datetime import datetime
 from flask_cors import CORS
 import os
 import pymongo
+import pyttsx3
+import speech_recognition as sr
 
 app = Flask(__name__)
 CORS(app)
@@ -192,6 +199,13 @@ CORS(app)
 client = pymongo.MongoClient("mongodb://127.0.0.1:27017/")
 db = client["TeleMedicine"]
 appointments_collection = db["appointments"]
+
+# Initialize text-to-speech engine
+engine = pyttsx3.init()
+
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
 
 # Google Gemini API Key
 GEMINI_API_KEY = "AIzaSyDlpNK9Csn0h-B5YHWM3LU2W3o6wJGlda0"
@@ -237,7 +251,9 @@ def book_appointment():
     appointment_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     appointment = {"date": datetime.now(), "time": appointment_time, "status": "Confirmed"}
     appointments_collection.insert_one(appointment)
-    return f"Your appointment is scheduled for {appointment_time}. Please check your messages for confirmation."
+    confirmation_message = f"Your appointment is scheduled for {appointment_time}. Please check your messages for confirmation."
+    speak(confirmation_message)
+    return confirmation_message
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -267,9 +283,26 @@ def chat():
     if detected_disease:
         response = f"To treat **{detected_disease}**, follow these steps:\n\n{response}\n\n{get_recommendations(detected_disease)}"
         response += "\n\nWould you like to book an appointment with a doctor? (yes/no)"
+        speak(response)
         return jsonify({"response": response, "state": {"awaiting_appointment_confirmation": True}})
 
+    speak(response)
     return jsonify({"response": response, "state": {}})
+
+@app.route('/voice-chat', methods=['POST'])
+def voice_chat():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        speak("I'm listening. Please say something.")
+        try:
+            audio = recognizer.listen(source)
+            user_input = recognizer.recognize_google(audio)
+            speak(f"You said: {user_input}")
+            return chat()
+        except sr.UnknownValueError:
+            return jsonify({"error": "Could not understand audio"})
+        except sr.RequestError:
+            return jsonify({"error": "Could not request results from Google Speech Recognition service"})
 
 if __name__ == "__main__":
     app.run(debug=True)
