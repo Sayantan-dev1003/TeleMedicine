@@ -15,7 +15,7 @@ const Chatbot = () => {
     const [isListening, setIsListening] = useState(false);
     const [recognition, setRecognition] = useState(null);
 
-    const toggleChat = () => {
+    const toggleChat = () => { 
         setIsOpen((prev) => !prev);
         setShowWelcome(false);
     };
@@ -70,7 +70,7 @@ const Chatbot = () => {
 
             const data = await response.json();
             setChatResponse(data.response);
-            setUserInput(''); // Clear input after sending
+            setUserInput('');
         } catch (error) {
             console.error('Error:', error);
             setChatResponse("Sorry, there was an error processing your request.");
