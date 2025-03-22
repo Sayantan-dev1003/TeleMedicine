@@ -2,3 +2,7 @@ Flask
 flask-cors
 requests
 pymongo
+pandas
+scikit-learn
+thefuzz
+python-Levenshtein
