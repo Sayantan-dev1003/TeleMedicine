@@ -31,7 +31,9 @@ const Chatbot = () => {
 
     const handleInputFocus = () => {
         // Check if the token is present in the cookie
-        const token = Cookies.get('token'); // Replace 'token' with your actual cookie name
+        const token = Cookies.get('token');
+        console.log("token", token)
+        console.log("All Cookies:", Cookies.get());
         if (!token) {
             setIsSignupOpen(true); // Show Signup first
             setIsSigninOpen(false); // Ensure Signin is closed
@@ -116,4 +118,4 @@ const Chatbot = () => {
     );
 };
 
-export default Chatbot;   
+export default Chatbot;

@@ -84,7 +84,7 @@ app.post("/register", async (req, res) => {
 
     // Generate authentication token
     const token = jwt.sign({ email: email, userid: user._id, userType: userType }, "Sayantan");
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token, { secure: true, sameSite: "Strict" });
     res.status(201).json({ message: "User registered successfully" });
 });
 
@@ -121,8 +121,7 @@ app.post("/login", async (req, res) => {
         );
 
         // Set HTTP-only cookie for security
-        res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "Strict" });
-
+        res.cookie("token", token, { secure: true, sameSite: "Strict" });
         return res.status(200).json({ message: "Login successful", userType, token });
 
     } catch (error) {

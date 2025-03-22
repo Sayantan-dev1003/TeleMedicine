@@ -1,8 +1,11 @@
 import React from 'react'
+import Chatbot from "../Components/Chatbot"
 
 const PatientDashboard = () => {
   return (
-    <div>patientDashboard</div>
+    <>
+      <Chatbot />
+    </>
   )
 }
 
