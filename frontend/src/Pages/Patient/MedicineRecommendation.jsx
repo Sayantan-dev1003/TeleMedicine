@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from "../Components/Sidebar";
-import PatientHeader from "../Components/PatientHeader";
+import Sidebar from "../../Components/Sidebar";
+import PatientHeader from "../../Components/PatientHeader";
 
 const MedicineRecommendation = () => {
     const [medicine, setMedicine] = useState("");

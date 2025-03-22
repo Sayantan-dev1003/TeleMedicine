@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import DeliveryImg from "../../public/admin.jpg";
-import Chatbot from "../Components/ChatBot";
-import Sidebar from "../Components/Sidebar";
-import PatientHeader from "../Components/PatientHeader";
+import DeliveryImg from "../../../public/admin.jpg";
+import Chatbot from "../../Components/Chatbot";
+import Sidebar from "../../Components/Sidebar";
+import PatientHeader from "../../Components/PatientHeader";
 
 const PatientDashboard = () => {
   const navigate = useNavigate();
