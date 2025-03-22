@@ -3,7 +3,7 @@ import { MdSend } from "react-icons/md";
 
 const Contact = () => {
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100 px-36">
+        <div className="flex justify-center items-center min-h-screen bg-[#D8EFED] px-36">
             <div className="w-2/3">
                 <h2 className="text-6xl font-semibold text-[#064848] mb-8 montserrat">Get in Touch</h2>
                 <form className="space-y-4 w-full flex flex-col justify-center items-center">

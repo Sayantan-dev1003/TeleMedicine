@@ -94,9 +94,9 @@ const Chatbot = () => {
                 {!isOpen && (
                     <button
                         onClick={toggleChat}
-                        className="bg-[#027c7c] text-white rounded-full px-5 py-4 cursor-pointer transition-all duration-700 hover:rotate-180"
+                        className="bg-[#027c7c] text-white rounded-full px-4 py-4 cursor-pointer transition-all duration-700 hover:rotate-180"
                     >
-                        <FontAwesomeIcon icon={faRobot} />
+                        <FontAwesomeIcon icon={faRobot} className='text-xl' />
                     </button>
                 )}
 
@@ -132,7 +132,7 @@ const Chatbot = () => {
                             <input
                                 type="text"
                                 placeholder="Type a message..."
-                                className="border rounded p-2 mt-2"
+                                className="border rounded p-2 mt-2 text-[#027c7c]"
                                 value={userInput}
                                 onChange={handleInputChange}
                                 onFocus={handleInputFocus}
