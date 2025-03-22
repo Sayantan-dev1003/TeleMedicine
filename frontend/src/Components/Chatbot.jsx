@@ -18,6 +18,10 @@ const Chatbot = () => {
         setShowWelcome(false);
     };
 
+    // const formatText = (text) => {
+    //     return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    // };
+
     useEffect(() => {
         let timer;
         if (!isOpen) {
@@ -104,8 +108,8 @@ const Chatbot = () => {
                 {showWelcome && !isOpen && (
                     <div className="absolute w-64 right-16 bottom-0 bg-[#027c7c] text-white rounded-full px-5 py-4 transition-all duration-300 welcome-message flex items-center justify-between text-base">
                         <span>Welcome! Click to chat.</span>
-                        <button 
-                            className="text-white cursor-pointer text-base font-bold" 
+                        <button
+                            className="text-white cursor-pointer text-base font-bold"
                             onClick={toggleChat}
                         >
                             <FontAwesomeIcon icon={faXmark} />
@@ -125,7 +129,11 @@ const Chatbot = () => {
                         <div className="flex-1 overflow-y-auto mt-2">
                             <div className="p-2 bg-transparent mb-2 text-[#027c7c]">Hello! I'm your healthcare assistant. Please describe your symptoms.</div>
                             {chatResponse && (
-                                <p style={{ whiteSpace: "pre-line" }} className="p-2 bg-transparent mb-2 text-[#027c7c]">{chatResponse}</p>
+                                <p
+                                    style={{ whiteSpace: "pre-line" }}
+                                    className="p-2 bg-transparent mb-2 text-[#027c7c]"
+                                    dangerouslySetInnerHTML={{ __html: chatResponse.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") }}
+                                />
                             )}
                         </div>
                         <form onSubmit={handleSubmit}>

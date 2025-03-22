@@ -13,10 +13,6 @@ const appointmentSchema = mongoose.Schema({
         default: "Pending"
     },
     reason: { type: String, required: true },
-    review: { 
-        rating: { type: Number, min: 1, max: 5 },
-        comment: { type: String }
-    }
 }, { timestamps: true });
 
 export default mongoose.model("Appointment", appointmentSchema);
