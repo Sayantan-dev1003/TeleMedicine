@@ -137,7 +137,7 @@ app.get("/logout", (req, res) => {
 });
 
 // Catch-all route to serve the frontend
-app.get("*",  (req, res) => {
+app.get("*", authenticateToken, (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
