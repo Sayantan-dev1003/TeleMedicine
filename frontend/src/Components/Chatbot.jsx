@@ -16,7 +16,7 @@ const Chatbot = () => {
     const [isListening, setIsListening] = useState(false);
     const [recognition, setRecognition] = useState(null);
 
-    const toggleChat = () => {
+    const toggleChat = () => { 
         setIsOpen((prev) => !prev);
         setShowWelcome(false);
     };
@@ -73,6 +73,9 @@ const Chatbot = () => {
             setChatHistory([...chatHistory, { user: userInput }, { bot: data.response }]);
     
             setChatState(data.state || {});
+
+            setChatResponse(data.response);
+
             setUserInput('');
         } catch (error) {
             console.error('Error:', error);
