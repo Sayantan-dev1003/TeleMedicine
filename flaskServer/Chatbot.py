@@ -177,18 +177,23 @@
 # # Run the Flask app
 # if __name__ == "__main__":
 #     app.run(debug=True)
-
 from flask import Flask, request, jsonify
 import requests
 import json
 from datetime import datetime
 from flask_cors import CORS
 import os
+import pymongo
 
 app = Flask(__name__)
 CORS(app)
 
-# Google Gemini API Key (Use environment variable)
+# MongoDB connection
+client = pymongo.MongoClient("mongodb://127.0.0.1:27017/")
+db = client["TeleMedicine"]
+appointments_collection = db["appointments"]
+
+# Google Gemini API Key
 GEMINI_API_KEY = "AIzaSyDlpNK9Csn0h-B5YHWM3LU2W3o6wJGlda0"
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
 
@@ -230,13 +235,26 @@ def get_recommendations(disease):
 
 def book_appointment():
     appointment_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    appointment = {"date": datetime.now(), "time": appointment_time, "status": "Confirmed"}
+    appointments_collection.insert_one(appointment)
     return f"Your appointment is scheduled for {appointment_time}. Please check your messages for confirmation."
 
 @app.route('/chat', methods=['POST'])
 def chat():
     user_input = request.json.get('input')
+    user_state = request.json.get('state', {})
+
     if not user_input:
         return jsonify({"error": "No input provided"}), 400
+
+    if user_state.get("awaiting_appointment_confirmation"):
+        if "yes" in user_input.lower():
+            appointment_info = book_appointment()
+            return jsonify({"response": f"✅ {appointment_info} Your appointment has been successfully booked.", "state": {}})
+        elif "no" in user_input.lower():
+            return jsonify({"response": "Alright! Let me know if you need any help.", "state": {}})
+        else:
+            return jsonify({"response": "I didn't get that. Would you like to book an appointment? (yes/no)", "state": {"awaiting_appointment_confirmation": True}})
 
     response = gemini_response(user_input)
 
@@ -247,12 +265,11 @@ def chat():
             break
 
     if detected_disease:
-        response = f"To treat {detected_disease}, follow these steps:\n\n{response}\n\n{get_recommendations(detected_disease)}"
+        response = f"To treat **{detected_disease}**, follow these steps:\n\n{response}\n\n{get_recommendations(detected_disease)}"
+        response += "\n\nWould you like to book an appointment with a doctor? (yes/no)"
+        return jsonify({"response": response, "state": {"awaiting_appointment_confirmation": True}})
 
-    appointment_info = book_appointment()
-    response += f"\n\n{appointment_info}"
-
-    return jsonify({"response": response})
+    return jsonify({"response": response, "state": {}})
 
 if __name__ == "__main__":
     app.run(debug=True)

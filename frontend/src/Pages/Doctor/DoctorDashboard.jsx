@@ -1,7 +1,7 @@
 import React from "react";
-import DeliveryImg from "../../public/adminDr.jpg";
-import DoctorSidebar from "../Components/DoctorSidebar";
-import DoctorHeader from "../Components/DoctorHeader";
+import DeliveryImg from "../../../public/adminDr.jpg";
+import DoctorSidebar from "../../Components/DoctorSidebar";
+import DoctorHeader from "../../Components/DoctorHeader";
 
 const DoctorDashboard = () => {
   return (

@@ -13,7 +13,7 @@ import Prescription from './Pages/Patient/Prescription'
 import Settings from './Pages/Patient/Settings'
 import VideoConsultation from './Pages/Patient/VideoConsultation'
 
-import DoctorDashboard from './Pages/DoctorDashboard'
+import DoctorDashboard from './Pages/Doctor/DoctorDashboard'
 
 const App = () => {
   return (

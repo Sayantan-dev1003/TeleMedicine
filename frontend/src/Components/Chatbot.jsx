@@ -11,7 +11,8 @@ const Chatbot = () => {
     const [isSignupOpen, setIsSignupOpen] = useState(false);
     const [isSigninOpen, setIsSigninOpen] = useState(false);
     const [userInput, setUserInput] = useState('');
-    const [chatResponse, setChatResponse] = useState('');
+    const [chatHistory, setChatHistory] = useState([]);
+    const [chatState, setChatState] = useState({});
     const [isListening, setIsListening] = useState(false);
     const [recognition, setRecognition] = useState(null);
 
@@ -48,35 +49,37 @@ const Chatbot = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (userInput.trim() === '') return;
-
-        // Stop listening if active
+    
         if (recognition) {
             recognition.stop();
             setIsListening(false);
         }
-
+    
         try {
             const response = await fetch('http://localhost:5000/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ input: userInput }),
+                body: JSON.stringify({ input: userInput, state: chatState }),
             });
-
+    
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
+    
             const data = await response.json();
-            setChatResponse(data.response);
-            setUserInput(''); // Clear input after sending
+    
+            setChatHistory([...chatHistory, { user: userInput }, { bot: data.response }]);
+    
+            setChatState(data.state || {});
+            setUserInput('');
         } catch (error) {
             console.error('Error:', error);
-            setChatResponse("Sorry, there was an error processing your request.");
+            setChatHistory([...chatHistory, { bot: "Sorry, there was an error processing your request." }]);
         }
     };
-
+    
     const startListening = () => {
         if (!('webkitSpeechRecognition' in window)) {
             alert('Speech recognition is not supported in this browser. Please use Chrome.');
@@ -98,15 +101,8 @@ const Chatbot = () => {
         };
 
         newRecognition.onerror = (event) => {
-            if (event.error === 'no-speech') {
-                alert('No speech detected. Please try again.');
-            } else if (event.error === 'audio-capture') {
-                alert('No microphone was found. Ensure that a microphone is connected.');
-            } else if (event.error === 'not-allowed') {
-                alert('Permission to use microphone was denied.');
-            } else {
-                alert(`Speech recognition error: ${event.error}`);
-            }
+            setIsListening(false);
+            alert(`Speech recognition error: ${event.error}`);
         };
 
         newRecognition.onend = () => {
@@ -120,29 +116,6 @@ const Chatbot = () => {
     return (
         <>
             <div className="fixed bottom-4 right-4 poppins">
-                <style>
-                    {`
-                        @keyframes slideIn {
-                            0% {
-                                transform: translateX(100%);
-                                opacity: 0;
-                            }
-                            100% {
-                                transform: translateX(0);
-                                opacity: 1;
-                            }
-                        }
-                        @keyframes fadeIn {
-                            0% { opacity: 0; }
-                            50% { opacity: 0.5; }
-                            100% { opacity: 1; }
-                        }
-                        .welcome-message {
-                            animation: slideIn 0.5s forwards, fadeIn 0.5s forwards;
-                        }
-                    `}
-                </style>
-
                 {!isOpen && (
                     <button
                         onClick={toggleChat}
@@ -150,18 +123,6 @@ const Chatbot = () => {
                     >
                         <FontAwesomeIcon icon={faRobot} className='text-xl' />
                     </button>
-                )}
-
-                {showWelcome && !isOpen && (
-                    <div className="absolute w-64 right-16 bottom-0 bg-[#027c7c] text-white rounded-full px-5 py-4 transition-all duration-300 welcome-message flex items-center justify-between text-base">
-                        <span>Welcome! Click to chat.</span>
-                        <button
-                            className="text-white cursor-pointer text-base font-bold"
-                            onClick={toggleChat}
-                        >
-                            <FontAwesomeIcon icon={faXmark} />
-                        </button>
-                    </div>
                 )}
 
                 {isOpen && (
@@ -173,14 +134,14 @@ const Chatbot = () => {
                             </button>
                         </div>
                         <div className="flex-1 overflow-y-auto mt-2">
-                            <div className="p-2 bg-transparent mb-2 text-[#027c7c]">Hello! I'm your healthcare assistant. Please describe your symptoms.</div>
-                            {chatResponse && (
-                                <p
-                                    style={{ whiteSpace: "pre-line" }}
-                                    className="p-2 bg-transparent mb-2 text-[#027c7c]"
-                                    dangerouslySetInnerHTML={{ __html: chatResponse.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") }}
-                                />
-                            )}
+                            {chatHistory.map((msg, index) => (
+                                <p 
+                                style={{whiteSpace: 'pre-line'}}
+                                key={index} 
+                                className={`p-2 mb-2 ${msg.user ? "text-black" : "text-[#027c7c]"}`}
+                                dangerouslySetInnerHTML={{ __html: msg.user ? `👤 ${msg.user}` : `🤖 ${msg.bot}` }}
+                            />
+                            ))}
                         </div>
                         <form onSubmit={handleSubmit} className='w-full flex items-center'>
                             <input
@@ -191,14 +152,13 @@ const Chatbot = () => {
                                 onChange={handleInputChange}
                                 onFocus={handleInputFocus}
                             />
-                            <button type="button" onClick={startListening} className='text-[#027c7c] text-lg relative right-6 top-1'>
+                            <button type="button" onClick={startListening} className={`text-lg relative right-6 top-1 ${isListening ? "text-red-500 animate-pulse" : "text-[#027c7c]"}`}>
                                 <FontAwesomeIcon icon={faMicrophone} />
                             </button>
                         </form>
                     </div>
                 )}
             </div>
-
             {isSignupOpen && <Signup setIsSignupOpen={setIsSignupOpen} setIsSigninOpen={setIsSigninOpen} />}
             {isSigninOpen && <Signin setIsSignupOpen={setIsSignupOpen} setIsSigninOpen={setIsSigninOpen} />}
         </>

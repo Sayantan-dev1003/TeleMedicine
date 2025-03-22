@@ -12,7 +12,6 @@ const appointmentSchema = mongoose.Schema({
         enum: ["Pending", "Confirmed", "Completed", "Canceled"], 
         default: "Pending"
     },
-    reason: { type: String, required: true },
-}, { timestamps: true });
+});
 
 export default mongoose.model("Appointment", appointmentSchema);
