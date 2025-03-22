@@ -46,7 +46,7 @@ const Signin = ({ setIsSignupOpen, setIsSigninOpen }) => {
     return (
         <section id="signin-modal" className="fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-blur-lg bg-[rgba(17,22,28,0.8)] z-50">
             <div className="w-[40vw] flex flex-col items-center justify-center bg-white shadow-lg rounded-xl p-8">
-                <h2 className="text-3xl font-bold text-blue-800 text-center mb-6">Sign In</h2>
+                <h2 className="text-3xl font-bold text-[#327878] text-center mb-6">Sign In</h2>
 
                 {/* Close Button */}
                 <button
@@ -60,7 +60,7 @@ const Signin = ({ setIsSignupOpen, setIsSigninOpen }) => {
                 {/* User Type Selection */}
                 <div className="flex gap-4 mb-6 justify-center w-full">
                     <button
-                        className={`px-4 py-2 rounded-lg font-semibold transition-all cursor-pointer ${userType === "patient" ? "bg-blue-400 text-white" : "bg-gray-200 text-gray-700"}`}
+                        className={`px-4 py-2 rounded-lg font-semibold transition-all cursor-pointer ${userType === "patient" ? "bg-[#81dede] hover:bg-[#327878] text-white" : "bg-gray-200 text-gray-700"}`}
                         onClick={() => setUserType("patient")}
                         aria-label="Select Patient Role"
                     >
@@ -68,7 +68,7 @@ const Signin = ({ setIsSignupOpen, setIsSigninOpen }) => {
                         Patient
                     </button>
                     <button
-                        className={`px-4 py-2 rounded-lg font-semibold transition-all cursor-pointer ${userType === "doctor" ? "bg-blue-400 text-white" : "bg-gray-200 text-gray-700"}`}
+                        className={`px-4 py-2 rounded-lg font-semibold transition-all cursor-pointer ${userType === "doctor" ? "bg-[#81dede] hover:bg-[#327878] text-white" : "bg-gray-200 text-gray-700"}`}
                         onClick={() => setUserType("doctor")}
                         aria-label="Select Doctor Role"
                     >
@@ -90,7 +90,7 @@ const Signin = ({ setIsSignupOpen, setIsSigninOpen }) => {
                             type="email"
                             name="email"
                             placeholder="Email Address"
-                            className="w-full pl-10 pr-3 py-2 border-2 border-blue-300 rounded-lg outline-none transition-all duration-300 focus:border-blue-500"
+                            className="w-full pl-10 pr-3 py-2 rounded-lg outline-none transition-all duration-300 border-2 border-[#81dede] focus:border-[#327878]"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
@@ -104,7 +104,7 @@ const Signin = ({ setIsSignupOpen, setIsSigninOpen }) => {
                             type="password"
                             name="password"
                             placeholder="Password"
-                            className="w-full pl-10 pr-3 py-2 border-2 border-blue-300 rounded-lg outline-none transition-all duration-300 focus:border-blue-500"
+                            className="w-full pl-10 pr-3 py-2 rounded-lg outline-none transition-all duration-300 border-2 border-[#81dede] focus:border-[#327878]"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -116,7 +116,7 @@ const Signin = ({ setIsSignupOpen, setIsSigninOpen }) => {
                         Don't have an account?{" "}
                         <button
                             type="button"
-                            className="text-blue-400 font-semibold hover:underline hover:text-blue-600 cursor-pointer"
+                            className="text-[#81dede] font-semibold hover:underline hover:text-[#327878] cursor-pointer"
                             onClick={() => { setIsSigninOpen(false); setIsSignupOpen(true); }}
                             aria-label="Register here"
                         >
@@ -126,7 +126,7 @@ const Signin = ({ setIsSignupOpen, setIsSigninOpen }) => {
 
                     <button
                         type="submit"
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105"
+                        className="bg-[#327878] text-white px-4 py-2 rounded-lg cursor-pointer transition-all duration-300 hover:scale-105"
                     >
                         {userType === "patient" ? "Sign in as Patient" : "Sign in as Doctor"}
                     </button>
