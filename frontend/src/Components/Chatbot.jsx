@@ -28,7 +28,6 @@ const Chatbot = () => {
                 setShowWelcome(true);
             }, 3000);
         }
-
         return () => {
             if (timer) clearTimeout(timer);
         };
@@ -70,23 +69,24 @@ const Chatbot = () => {
     
             const data = await response.json();
 
-    
-            setChatHistory([...chatHistory, { user: userInput }, { bot: data.response }]);
+            setChatHistory(prevHistory => [...prevHistory, { user: userInput }, { bot: data.response }]);
     
             setChatState(data.state || {});
-
-            setChatResponse(data.response);
 
             setUserInput('');
         } catch (error) {
             console.error('Error:', error);
-            setChatHistory([...chatHistory, { bot: "Sorry, there was an error processing your request." }]);
+            setChatHistory(prevHistory => [...prevHistory, { bot: "Sorry, there was an error processing your request." }]);
         }
     };
     
     const startListening = () => {
         if (!('webkitSpeechRecognition' in window)) {
             alert('Speech recognition is not supported in this browser. Please use Chrome.');
+            return;
+        }
+
+        if (isListening) {
             return;
         }
 

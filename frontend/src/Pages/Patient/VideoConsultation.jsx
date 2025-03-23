@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000"); // Flask Socket.IO Server
+const socket = io("http://localhost:5000", { transports: ["websocket"] }); // Ensures WebSocket connection
 
 const VideoCall = () => {
   const localVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
   const peerConnection = useRef(null);
+  const localStreamRef = useRef(null);
   const [username, setUsername] = useState("");
   const [targetUser, setTargetUser] = useState("");
   const [connected, setConnected] = useState(false);
@@ -27,20 +28,25 @@ const VideoCall = () => {
 
     socket.on("answer", async (data) => {
       console.log("Received answer");
-      await peerConnection.current.setRemoteDescription(new RTCSessionDescription(data.answer));
+      if (peerConnection.current) {
+        await peerConnection.current.setRemoteDescription(new RTCSessionDescription(data.answer));
+      }
     });
 
     socket.on("ice-candidate", async (data) => {
       console.log("Received ICE candidate");
-      try {
-        await peerConnection.current.addIceCandidate(new RTCIceCandidate(data.candidate));
-      } catch (error) {
-        console.error("Error adding received ICE candidate", error);
+      if (peerConnection.current) {
+        try {
+          await peerConnection.current.addIceCandidate(new RTCIceCandidate(data.candidate));
+        } catch (error) {
+          console.error("Error adding received ICE candidate", error);
+        }
       }
     });
 
     return () => {
       socket.disconnect();
+      endCall(); // Cleanup on component unmount
     };
   }, []);
 
@@ -61,6 +67,16 @@ const VideoCall = () => {
       }
     };
 
+    pc.onnegotiationneeded = async () => {
+      try {
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        socket.emit("offer", { target: remoteUsername, offer });
+      } catch (error) {
+        console.error("Error during renegotiation", error);
+      }
+    };
+
     return pc;
   };
 
@@ -75,14 +91,14 @@ const VideoCall = () => {
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      localStreamRef.current = stream;
+
       if (localVideoRef.current) {
         localVideoRef.current.srcObject = stream;
       }
+      
       stream.getTracks().forEach((track) => peerConnection.current.addTrack(track, stream));
 
-      const offer = await peerConnection.current.createOffer();
-      await peerConnection.current.setLocalDescription(offer);
-      socket.emit("offer", { target: targetUser, offer });
       setConnected(true);
     } catch (error) {
       console.error("Error accessing media devices.", error);
@@ -93,6 +109,10 @@ const VideoCall = () => {
     if (peerConnection.current) {
       peerConnection.current.close();
       peerConnection.current = null;
+    }
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach((track) => track.stop());
+      localStreamRef.current = null;
     }
     setConnected(false);
   };
