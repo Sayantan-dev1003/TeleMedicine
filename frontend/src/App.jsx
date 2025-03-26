@@ -13,6 +13,8 @@ import Prescription from './Pages/Patient/Prescription'
 import Settings from './Pages/Patient/Settings'
 import VideoConsultation from './Pages/Patient/VideoConsultation'
 import DoctorDashboard from './Pages/Doctor/DoctorDashboard'
+import PatientList from './Pages/Patient/PatientList'
+import PrescriptionForm from './Pages/Doctor/PrescriptionForm'
 
 const App = () => {
   return (
@@ -30,8 +32,11 @@ const App = () => {
             <Route path='/prescription' element={<Prescription />}></Route>
             <Route path='/settings' element={<Settings />}></Route>
             <Route path='/video-consultation' element={<VideoConsultation />}></Route>
-
+            <Route path='/patients-list' element={<PatientList />}></Route>
             <Route path='/doctor-dashboard' element={<DoctorDashboard />}></Route>
+            
+            <Route path='/prescription-form' element={<PrescriptionForm />}></Route>
+            
         </Routes>
     </>
   )
