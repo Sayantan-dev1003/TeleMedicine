@@ -4,11 +4,14 @@
 ![AI/ML Stack](https://img.shields.io/badge/AI%2FML-OpenCV%20%7C%20MTCNN%20%7C%20InceptionResnetV1%20%7C%20Scikit--learn%20%7C%20NumPy-blue)
 
 ## 📌 Overview
-- TeleMedicine is an AI-powered platform designed to revolutionize healthcare access in rural and underserved areas. With limited infrastructure and availability of medical professionals in such regions, this platform bridges the gap by offering remote doctor consultations, AI-driven preliminary diagnoses, and smart medicine recommendations. 
-- Offers:
---Remote doctor consultations via video calls.
---AI-powered preliminary diagnoses using symptom analysis.
---Smart medicine recommendations, including alternatives.
+TeleMedicine is an AI-powered platform designed to revolutionize healthcare access in rural and underserved areas. With limited infrastructure and availability of medical professionals in such regions, this platform bridges the gap by offering remote doctor consultations, AI-driven preliminary diagnoses, and smart medicine recommendations.
+
+### ✅ Offers
+
+- 💬 **Remote Doctor Consultations** via secure, real-time video calls.
+- 🧠 **AI-Powered Preliminary Diagnoses** through intelligent symptom analysis.
+- 💊 **Smart Medicine Recommendations**, including affordable alternatives.
+
 - Integrated with IP cameras, it ensures seamless tracking without manual intervention.
 - The platform features a dynamic React.js dashboard, backed by Node.js and Supabase, providing administrators with insightful analytics, attendance logs, and real-time data visualization.
 - This project blends machine learning, computer vision, and full-stack web development to solve a real-world problem efficiently and intelligently.
