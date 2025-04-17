@@ -2,7 +2,7 @@
 
 ![Frontend + Backend](https://img.shields.io/badge/Tech%20Stack-Frontend%3A%20React.js%20%7C%20WebRTC%20%7C%20Socket.io%20--Backend%3A%20Node.js%20%7C%20Express.js%20%7C%20Supabase%20%7C%20MongoDB-brightgreen)
 ![AI/ML Stack](https://img.shields.io/badge/AI%2FML-Python%20%7C%20TensorFlow%20%7C%20Scikit--Learn%20%7C%20NLTK%20%7C%20Hugging%20Face%20Transformers-blue)
-![Others](https://img.shields.io/badge/Others-OpenStreetMap%20%7C%20Microservices%20Architecture-lightgrey)
+![Others](https://img.shields.io/badge/Others-OpenStreetMap%20%7C%20Microservices%20Architecture-orange)
 
 ## 📌 Overview
 TeleMedicine is an AI-powered platform designed to revolutionize healthcare access in rural and underserved areas. With limited infrastructure and availability of medical professionals in such regions, this platform bridges the gap by offering remote doctor consultations, AI-driven preliminary diagnoses, and smart medicine recommendations.
