@@ -1,7 +1,7 @@
 # AI-Powered Telemedicine Platform for Remote Healthcare
 
-![Frontend + Backend](https://img.shields.io/badge/Tech%20Stack-Frontend%3A%20React.js%20%7C%20WebRTC%20%7C%20Socket.io%20--Backend%3A%20Node.js%20%7C%20Express.js%20%7C%20Supabase%20%7C%20MongoDB-brightgreen)
-![AI/ML Stack](https://img.shields.io/badge/AI%2FML-Python%20%7C%20TensorFlow%20%7C%20Scikit--Learn%20%7C%20NLTK%20%7C%20Hugging%20Face%20Transformers-blue)
+![Frontend + Backend](https://img.shields.io/badge/Tech%20Stack-Frontend%3A%20React.js%20%7C%20WebRTC%20%7C%20Socket.io%20--Backend%3A%20Node.js%20%7C%20Express.js%20%7C%20Supabase%20%7C%20MongoDB-brightgreen)<br>
+![AI/ML Stack](https://img.shields.io/badge/AI%2FML-Python%20%7C%20TensorFlow%20%7C%20Scikit--Learn%20%7C%20NLTK%20%7C%20Hugging%20Face%20Transformers-blue)<br>
 ![Others](https://img.shields.io/badge/Others-OpenStreetMap%20%7C%20Microservices%20Architecture-orange)
 
 ## 📌 Overview
