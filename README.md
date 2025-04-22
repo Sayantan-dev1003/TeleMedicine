@@ -4,38 +4,42 @@
 ![AI/ML Stack](https://img.shields.io/badge/AI%2FML-Python%20%7C%20TensorFlow%20%7C%20Scikit--Learn%20%7C%20NLTK%20%7C%20Hugging%20Face%20Transformers-blue)<br>
 ![Others](https://img.shields.io/badge/Others-OpenStreetMap%20%7C%20Microservices%20Architecture-orange)
 
-## 📌 Overview
-TeleMedicine is an AI-powered platform designed to revolutionize healthcare access in rural and underserved areas. With limited infrastructure and availability of medical professionals in such regions, this platform bridges the gap by offering remote doctor consultations, AI-driven preliminary diagnoses, and smart medicine recommendations.
+## Overview
+Access to quality healthcare remains a challenge, especially in underserved and rural areas with limited medical infrastructure. This AI-powered telemedicine platform bridges this gap by enabling remote healthcare consultations, making medical expertise accessible without requiring physical visits.
 
-### ✅ Offers
+This platform integrates AI and ML technologies to facilitate intelligent diagnosis, automate appointment scheduling, and recommend alternative treatments. The system ensures real-time doctor-patient communication through video consultations and an AI-powered chatbot for preliminary diagnoses.
 
-- 💬 **Remote Doctor Consultations** via secure, real-time video calls.
-- 🧠 **AI-Powered Preliminary Diagnoses** through intelligent symptom analysis.
-- 💊 **Smart Medicine Recommendations**, including affordable alternatives.
+## Key Features
+- **NLP-Based Interface** - Enables users to interact in their local language for better understanding.
+- **AI-Powered Chatbot for Diagnosis** - Assesses symptoms and suggests preliminary recommendations if a doctor is unavailable.
+- **Automated Appointment Scheduling** - Users can schedule consultations or receive AI-generated Do’s & Don’ts based on symptom analysis.
+- **Interactive Map for Nearby Healthcare Services** - Displays available doctors, hospitals, and pharmacies.
+- **1:1 Video Calling with Doctors** - Secure WebRTC-based video consultations.
+- **Medicine Recognition Model** - Identifies medicines from images or names and suggests cheaper or more available alternatives.
 
-### 🔑 Key Features
+## AI/ML Integration
+The platform utilizes AI for:
+- **Symptom Checking & Preliminary Diagnosis** - AI-driven symptom analysis provides probable conditions, risk analysis, and treatment suggestions.
+- **Medicine Recognition & Alternative Recommendations** - Deep learning models process medical images and text.
+- **Reinforcement Learning for Chatbot Optimization** - Chatbot interactions continuously improve based on user feedback.
+- **Future Enhancements** - Integration with wearables for real-time health monitoring and AI-powered disease recognition from images.
 
-- 📹 **Real-Time Video Communication** using WebRTC for seamless doctor-patient interaction.
-- 🗣️ **Multilingual NLP Chatbot** for intuitive symptom input and user-friendly interaction.
-- 🤖 **Machine Learning Models** ensure accurate and data-driven health insights.
-
-### 🚀 Enables
-
-- ⚡ **Quick & Reliable Symptom Analysis** using AI algorithms.
-- 📅 **Appointment Scheduling** with healthcare professionals.
-- 💊 **Access to Alternative & Affordable Medicines** based on uploaded prescriptions or queries.
-
-### 🌍 Provides
-
-- 🧑‍⚕️ **Seamless and Personalized Healthcare**, even in remote or underserved areas where traditional medical facilities are limited.
-
-## 🛠 Tech Stack
+## Tech Stack
 - **Frontend**: React.js, Tailwind CSS, WebRTC, Socket.io, Axios
 - **Backend**: Node.js, Express.js, MongoDB, JWT / Bcrypt
 - **AI/ML**: Python, TensorFlow, NLTK, Scikit-learn, Hugging Face Transformers
 - **Others**: REST API, OpenStreetMap, Microservices Architecture
 
-## 🔧 Installation & Setup
+## Workflow
+1. User Interaction: Patients describe symptoms via NLP-based chatbot or opt for a 1:1 video consultation.
+2. AI Diagnosis: The chatbot processes symptoms and provides health recommendations.
+3. Medicine Recognition: Users upload medicine images or names for alternative recommendations.
+4. Appointment Scheduling: The system enables users to book consultations after symptom analysis.
+5. Data Processing: All interactions are securely managed via the Node.js backend and stored in databases.
+6. Real-Time Consultation: WebRTC-based secure video calls connect users with specialists.
+7. Continuous Improvement: Reinforcement learning optimizes chatbot responses over time.
+
+## Installation & Setup
 
 Follow the steps below to clone, install dependencies, and run the project locally. Make sure you have **Node.js**, **npm**, and **Python** installed on your machine.
 
